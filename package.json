@@ -1,0 +1,32 @@
+{
+  "name": "nuestraapi",
+  "version": "1.0.0",
+  "description": "Repositorio de codigo para la evidencia GA4-220501096-AA1-EV01",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalejotorresm/nuestraAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jalejotorresm/nuestraAPI/issues"
+  },
+  "homepage": "https://github.com/jalejotorresm/nuestraAPI#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
