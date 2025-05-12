@@ -1,6 +1,6 @@
 # nuestraAPI
 
-Repositorio de código para la evidencia GA4-220501096-AA1-EV01. Permite realizar operaciones CRUD completas (Crear, Leer, Actualizar, Eliminar) y autenticación de usuarios.
+Repositorio de código para la evidencia GA4-220501096-AA1-EV01. Permite realizar operaciones CRUD completas (Crear, Leer, Actualizar, Eliminar) para usuarios, productos y servicios, además de autenticación de usuarios.
 
 ## Requisitos previos
 
@@ -81,6 +81,29 @@ Los siguientes elementos son necesarios para ejecutar esta API:
   "descripcion": "Un juguete divertido",
   "precio": 10.99,
   "categoria": "Infantil"
+}
+```
+
+---
+
+### Servicios
+
+| Método | Endpoint             | Descripción                   |
+| ------ | -------------------- | ----------------------------- |
+| POST   | `/api/servicios`     | Crear un nuevo servicio       |
+| GET    | `/api/servicios`     | Obtener todos los servicios   |
+| GET    | `/api/servicios/:id` | Obtener un servicio por ID    |
+| PUT    | `/api/servicios/:id` | Actualizar un servicio por ID |
+| DELETE | `/api/servicios/:id` | Eliminar un servicio por ID   |
+
+#### Ejemplo de cuerpo para crear servicio:
+
+```json
+{
+  "nombre": "Masaje",
+  "descripcion": "Una experiencia de relajacion",
+  "precio": 21.95,
+  "categoria": "General"
 }
 ```
 

@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const rutasUsuario = require("./rutas/rutasUsuario");
 const rutasProducto = require("./rutas/rutasProducto");
+const rutasServicio = require("./rutas/rutasServicio");
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ mongoose
 
 app.use("/api", rutasUsuario);
 app.use("/api", rutasProducto);
+app.use("/api", rutasServicio);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
