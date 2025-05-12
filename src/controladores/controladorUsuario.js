@@ -1,6 +1,5 @@
 const Usuario = require("../modelos/modeloUsuario");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -8,40 +7,54 @@ dotenv.config();
 // Controlador para crear un nuevo usuario (POST)
 exports.crearUsuario = async (req, res) => {
   try {
-    const nuevoUsuario = new Usuario(req.body);
+    const { nombre, correo, contraseña } = req.body;
+
+    if (!nombre || !correo || !contraseña) {
+      return res
+        .status(400)
+        .json({ error: "Todos los campos son obligatorios" });
+    }
+
+    const nuevoUsuario = new Usuario({
+      nombre,
+      correo,
+      contraseña,
+    });
+
     await nuevoUsuario.save();
     res
       .status(201)
-      .json({ mensaje: "Usuario creado exitosamente", usuario: nuevoUsuario });
+      .json({ mensaje: "Usuario creado correctamente", usuario: nuevoUsuario });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 // Controlador para autenticar un usuario (POST)
 exports.autenticarUsuario = async (req, res) => {
   const { correo, contraseña } = req.body;
+
   try {
-    // Verificacion del usuario
+    if (!correo || !contraseña) {
+      return res
+        .status(400)
+        .json({ error: "Correo y contraseña son obligatorios" });
+    }
+
     const usuario = await Usuario.findOne({ correo });
     if (!usuario) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
+      return res.status(404).json({ mensaje: "Usuario no encontrado" });
     }
 
-    // Verificacion de la contraseña
-    const contraseñaValida = await bcrypt.compare(
-      contraseña,
-      usuario.contraseña
-    );
-    if (!contraseñaValida) {
-      return res.status(401).json({ error: "Credenciales inválidas" });
+    if (usuario.contraseña !== contraseña) {
+      return res.status(401).json({ mensaje: "Credenciales inválidas" });
     }
 
-    // Generacion del token
     const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.status(200).json({ mensaje: "Autenticación exitosa", token });
+
+    res.status(200).json({ mensaje: "Autenticación exitosa", token });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

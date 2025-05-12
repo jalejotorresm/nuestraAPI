@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -11,7 +10,7 @@ dotenv.config();
 const app = express();
 
 app.use(morgan("dev"));
-app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose
   .connect(process.env.DB_URI, {
